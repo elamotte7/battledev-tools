@@ -5,6 +5,6 @@ Inspired by [BattleDev-vscode](https://github.com/javascriptdezero/BattleDev-vsc
 How to do
 ---------
 * Download sample files from the website.
-* Put the input / output files into the resources directory.
+* Put the input / output files into the src/main/resources directory.
 * Start coding into the IsoContest 
 * Launch the Runner.kt to launch every tests
