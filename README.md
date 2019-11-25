@@ -1,6 +1,6 @@
 BattleDev tools
 ===============
-Inspired by [https://github.com/javascriptdezero/BattleDev-vscode][BattleDev-vscode]
+Inspired by [https://github.com/javascriptdezero/BattleDev-vscode](BattleDev-vscode)
 
 How to do
 ---------
