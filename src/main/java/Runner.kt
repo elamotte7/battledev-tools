@@ -18,7 +18,7 @@ fun main() {
             break
         }
         println("=======[ Test $i ]=======")
-        println("-- Valeurs d'entrée --\n${io.input}\n")
+        println("-- Input value --\n${io.input}\n")
         reporting.add(false)
 
         try {
@@ -29,7 +29,7 @@ fun main() {
                 val result = printer.output
                 if (isSuccess(io, result)) {
                     reporting[reporting.lastIndex] = true
-                    println("✅ Test $i réussi")
+                    println("✅ Test $i succeed")
                 } else {
                     System.err.println("❌ Test $i fail")
                     System.err.flush()
@@ -46,13 +46,11 @@ fun main() {
 }
 
 private fun displayResult(reporting: MutableList<Boolean>) {
-    if (reporting.isEmpty()) {
-        System.err.println("No test found. Try to put the inputXXX.txt and outputXXX.txt in the resources directory.")
-    } else if (reporting.all { it }) {
-        System.out.printf("100%% Success %s\n", "✅".repeat(reporting.size))
-    } else {
-        System.out.printf("Tests fail : [%s] %.2f %%\n",
-                reporting.map { if (it) "✅" else "❌" }.joinToString(""),
+    when {
+        reporting.isEmpty() -> System.err.println("No test found. Try to put the inputXXX.txt and outputXXX.txt in the resources directory.")
+        reporting.all { it } -> System.out.printf("100%% Success %s\n", "✅".repeat(reporting.size))
+        else -> System.out.printf("Tests fail : [%s] %.2f %%\n",
+                reporting.joinToString("") { if (it) "✅" else "❌" },
                 reporting.count { it }.toDouble() * 100.0 / reporting.size.toDouble()
         )
     }
@@ -61,7 +59,7 @@ private fun displayResult(reporting: MutableList<Boolean>) {
 fun printLineNumber(max: Int, current: Int) = String.format("%0${max}d. |", current)
 
 private fun isSuccess(io: InputOutputResource, result: Array<String>): Boolean {
-    println("-- Valeur reçue (de IsoContest.java) --")
+    println("-- Output value (from IsoContest.java) --")
     var success = true
     if (result.isEmpty()) {
         println("ERROR: No output. Use io.out.println() to submit your solution !")
@@ -82,7 +80,6 @@ private fun isSuccess(io: InputOutputResource, result: Array<String>): Boolean {
                 println(printLineNumber(lineSize, i) + received)
             }
         }
-        success = success && result.size == io.output.size
     }
     return success
 }
